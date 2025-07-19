@@ -5,15 +5,10 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class Api {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http:HttpClient){
-
+  PostComments(data: any) {
+    const url = "https://hmftj.com/interns/UApi/createInvoice.php"; // Correctly used URL
+    return this.http.post(url, data); // Remove quotes from 'url'
   }
-  
-  PostComments(data:any){
-    const url="https://hmftj.com/interns/UApi/createInvoice.php";
-    this.http.post('url',data);
-
-  }
-
 }
