@@ -1,48 +1,254 @@
-<form #input="ngForm" (ngSubmit)="AddDetails(input)" class="invoice-form">
+<form #input="ngForm" (ngSubmit)="AddDetails(input)" class="invoice-form" novalidate>
 
   <section class="form-block customer-info">
     <h1>Customer Info</h1>
-    <input type="number" [(ngModel)]="CId" name="CId" placeholder="Customer ID" required>
-    <input type="text" ngModel name="Name" placeholder="Customer Name" required>
-    <input type="number" ngModel name="PhoneNumber" placeholder="Customer Phone" required>
+
+    <div class="input-box">
+      <input
+        type="number"
+        [(ngModel)]="CId"
+        name="CId"
+        #CIdInput="ngModel"
+        placeholder="Customer ID"
+        required
+        (blur)="checkCIdUnique(CId)"
+        min="1"
+      />
+      <div class="error" *ngIf="CIdInput.invalid && (CIdInput.dirty || CIdInput.touched)">
+        <small *ngIf="CIdInput.errors?.['required']">Customer ID is required.</small>
+        <small *ngIf="CIdInput.errors?.['min']">Customer ID must be greater than 0.</small>
+        <small *ngIf="CIdExists">This Customer ID is already taken.</small>
+      </div>
+    </div>
+
+    <div class="input-box">
+      <input
+        type="text"
+        ngModel
+        name="Name"
+        #NameInput="ngModel"
+        placeholder="Customer Name"
+        required
+        minlength="3"
+      />
+      <div class="error" *ngIf="NameInput.invalid && (NameInput.dirty || NameInput.touched)">
+        <small *ngIf="NameInput.errors?.['required']">Customer Name is required.</small>
+        <small *ngIf="NameInput.errors?.['minlength']">Minimum 3 characters required.</small>
+      </div>
+    </div>
+
+    <div class="input-box">
+      <input
+        type="tel"
+        ngModel
+        name="PhoneNumber"
+        #PhoneNumberInput="ngModel"
+        placeholder="Customer Phone"
+        required
+        pattern="^\+?[0-9]{7,15}$"
+      />
+      <div class="error" *ngIf="PhoneNumberInput.invalid && (PhoneNumberInput.dirty || PhoneNumberInput.touched)">
+        <small *ngIf="PhoneNumberInput.errors?.['required']">Customer Phone is required.</small>
+        <small *ngIf="PhoneNumberInput.errors?.['pattern']">
+          Phone number must be 7 to 15 digits, optional leading +.
+        </small>
+      </div>
+    </div>
   </section>
 
   <section class="form-block company-info">
     <h1>Company Info</h1>
-    <input type="text" ngModel name="CName" placeholder="Company Name" required>
-    <input type="text" ngModel name="Address" placeholder="Company Address" required>
-    <input type="number" ngModel name="CompanyPhone" placeholder="Company Phone" required>
-    <input type="email" ngModel name="Email" placeholder="Company Email" required>
+
+    <div class="input-box">
+      <input
+        type="text"
+        ngModel
+        name="CName"
+        #CNameInput="ngModel"
+        placeholder="Company Name"
+        required
+        minlength="2"
+      />
+      <div class="error" *ngIf="CNameInput.invalid && (CNameInput.dirty || CNameInput.touched)">
+        <small *ngIf="CNameInput.errors?.['required']">Company Name is required.</small>
+        <small *ngIf="CNameInput.errors?.['minlength']">Minimum 2 characters required.</small>
+      </div>
+    </div>
+
+    <div class="input-box">
+      <input
+        type="text"
+        ngModel
+        name="Address"
+        #AddressInput="ngModel"
+        placeholder="Company Address"
+        required
+        minlength="5"
+      />
+      <div class="error" *ngIf="AddressInput.invalid && (AddressInput.dirty || AddressInput.touched)">
+        <small *ngIf="AddressInput.errors?.['required']">Company Address is required.</small>
+        <small *ngIf="AddressInput.errors?.['minlength']">Minimum 5 characters required.</small>
+      </div>
+    </div>
+
+    <div class="input-box">
+      <input
+        type="tel"
+        ngModel
+        name="CompanyPhone"
+        #CompanyPhoneInput="ngModel"
+        placeholder="Company Phone"
+        required
+        pattern="^\+?[0-9]{7,15}$"
+      />
+      <div class="error" *ngIf="CompanyPhoneInput.invalid && (CompanyPhoneInput.dirty || CompanyPhoneInput.touched)">
+        <small *ngIf="CompanyPhoneInput.errors?.['required']">Company Phone is required.</small>
+        <small *ngIf="CompanyPhoneInput.errors?.['pattern']">
+          Phone number must be 7 to 15 digits, optional leading +.
+        </small>
+      </div>
+    </div>
+
+    <div class="input-box">
+      <input
+        type="email"
+        ngModel
+        name="Email"
+        #EmailInput="ngModel"
+        placeholder="Company Email"
+        required
+        email
+      />
+      <div class="error" *ngIf="EmailInput.invalid && (EmailInput.dirty || EmailInput.touched)">
+        <small *ngIf="EmailInput.errors?.['required']">Company Email is required.</small>
+        <small *ngIf="EmailInput.errors?.['email']">Invalid email address.</small>
+      </div>
+    </div>
   </section>
 
   <section class="form-block invoice-item">
     <h1>Invoice Item</h1>
-    <input type="text" [(ngModel)]="item.description" name="description" placeholder="Item Description">
-    <input type="number" [(ngModel)]="item.quantity" name="quantity" placeholder="Quantity">
-    <input type="number" [(ngModel)]="item.price" name="price" placeholder="Price">
-    <button type="button" (click)="addItem()">Add Item</button>
-
-    <div *ngIf="items.length" class="items-list-wrapper">
-      <h3>Items:</h3>
-      <ul class="items-list">
-        <li *ngFor="let it of items">{{ it.description }} - {{ it.quantity }} x {{ it.price }} = {{ it.total }}</li>
-      </ul>
+    <div class="input-box">
+      <input
+        type="text"
+        [(ngModel)]="item.description"
+        name="description"
+        placeholder="Item Description"
+        required
+        #DescInput="ngModel"
+      />
+      <div class="error" *ngIf="DescInput.invalid && (DescInput.dirty || DescInput.touched)">
+        <small *ngIf="DescInput.errors?.['required']">Item Description is required.</small>
+      </div>
     </div>
 
-    <label>Due Date:</label>
-    <input type="date" [(ngModel)]="dueDate" name="dueDate" required>
+    <div class="input-box">
+      <input
+        type="number"
+        [(ngModel)]="item.quantity"
+        name="quantity"
+        placeholder="Quantity"
+        required
+        min="1"
+        #QtyInput="ngModel"
+      />
+      <div class="error" *ngIf="QtyInput.invalid && (QtyInput.dirty || QtyInput.touched)">
+        <small *ngIf="QtyInput.errors?.['required']">Quantity is required.</small>
+        <small *ngIf="QtyInput.errors?.['min']">Quantity must be at least 1.</small>
+      </div>
+    </div>
 
-    <p>Subtotal: {{ subtotal }}</p>
-    <p>Tax (10%): {{ tax }}</p>
-    <p><strong>Total: {{ total }}</strong></p>
+    <div class="input-box">
+      <input
+        type="number"
+        [(ngModel)]="item.price"
+        name="price"
+        placeholder="Price"
+        required
+        min="0.01"
+        step="0.01"
+        #PriceInput="ngModel"
+      />
+      <div class="error" *ngIf="PriceInput.invalid && (PriceInput.dirty || PriceInput.touched)">
+        <small *ngIf="PriceInput.errors?.['required']">Price is required.</small>
+        <small *ngIf="PriceInput.errors?.['min']">Price must be positive.</small>
+      </div>
+    </div>
+
+    <button type="button" (click)="addItem()">Add Item</button>
+
+    <div class="input-box" style="grid-column: span 2;">
+      <label>Due Date:</label>
+      <input
+        type="date"
+        [(ngModel)]="dueDate"
+        name="dueDate"
+        #DueDateInput="ngModel"
+        required
+        [min]="todayDate"
+      />
+      <div class="error" *ngIf="DueDateInput.invalid && (DueDateInput.dirty || DueDateInput.touched)">
+        <small *ngIf="DueDateInput.errors?.['required']">Due Date is required.</small>
+        <small *ngIf="DueDateInput.errors?.['min']">Due Date cannot be in the past.</small>
+      </div>
+    </div>
   </section>
 
   <section class="form-block payment-info">
     <h1>Payment Info</h1>
-    <input type="text" [(ngModel)]="payment.method" name="PaymentMethod" placeholder="Payment Method" required>
-    <input type="text" [(ngModel)]="payment.account_number" name="AccountNumber" placeholder="Account Number" required>
-    <input type="text" [(ngModel)]="payment.bank" name="Bank" placeholder="Bank Name" required>
+
+    <div class="input-box">
+      <input
+        type="text"
+        [(ngModel)]="payment.method"
+        name="PaymentMethod"
+        placeholder="Payment Method"
+        required
+        #PaymentMethodInput="ngModel"
+      />
+      <div class="error" *ngIf="PaymentMethodInput.invalid && (PaymentMethodInput.dirty || PaymentMethodInput.touched)">
+        <small *ngIf="PaymentMethodInput.errors?.['required']">Payment Method is required.</small>
+      </div>
+    </div>
+
+    <div class="input-box">
+      <input
+        type="text"
+        [(ngModel)]="payment.account_number"
+        name="AccountNumber"
+        placeholder="Account Number"
+        required
+        minlength="5"
+        #AccountNumberInput="ngModel"
+      />
+      <div class="error" *ngIf="AccountNumberInput.invalid && (AccountNumberInput.dirty || AccountNumberInput.touched)">
+        <small *ngIf="AccountNumberInput.errors?.['required']">Account Number is required.</small>
+        <small *ngIf="AccountNumberInput.errors?.['minlength']">Minimum 5 characters required.</small>
+      </div>
+    </div>
+
+    <div class="input-box">
+      <input
+        type="text"
+        [(ngModel)]="payment.bank"
+        name="Bank"
+        placeholder="Bank Name"
+        required
+        minlength="2"
+        #BankInput="ngModel"
+      />
+      <div class="error" *ngIf="BankInput.invalid && (BankInput.dirty || BankInput.touched)">
+        <small *ngIf="BankInput.errors?.['required']">Bank Name is required.</small>
+        <small *ngIf="BankInput.errors?.['minlength']">Minimum 2 characters required.</small>
+      </div>
+    </div>
   </section>
 
-  <button type="submit" class="submit-btn">Submit Invoice</button>
+  <button
+    type="submit"
+    class="submit-btn"
+    [disabled]="input.invalid || CIdExists"
+  >
+    Submit Invoice
+  </button>
 </form>
