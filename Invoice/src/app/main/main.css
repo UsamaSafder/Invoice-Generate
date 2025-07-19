@@ -1,0 +1,193 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #23374d, #3e5871);
+  color: #333;
+}
+
+.invoice-box {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+}
+
+.top-section {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  background: transparent;
+  margin-bottom: 30px;
+}
+
+.top-section .left h1 {
+  margin: 0 0 10px;
+  font-size: 2.5em;
+  color: #1a1a1a;
+}
+
+.top-section .right h2 {
+  margin: 0;
+  font-size: 1.5em;
+  color: #1a1a1a;
+}
+
+.info-section {
+  margin-bottom: 30px;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+.info-section .box h3 {
+  margin-top: 0;
+  color: #444;
+}
+
+.table-section table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 0;
+}
+
+.table-section th,
+.table-section td {
+  border: 1px solid #ddd;
+  padding: 12px 10px;
+  font-size: 0.95em;
+  text-align: left;
+}
+
+.table-section thead {
+  background: #ffe484;
+  color: #000;
+}
+
+.table-section tfoot {
+  background: none;
+}
+
+.table-section .right {
+  text-align: right;
+  font-weight: bold;
+}
+
+.payment-section {
+  margin-top: 30px;
+  padding: 20px;
+  background: #f1f1f1;
+  border-radius: 8px;
+}
+
+.payment-section h3 {
+  margin-top: 0;
+  color: #000;
+}
+
+.footer-note {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 0.85em;
+  color: #666;
+}
+
+/* Updated vertical total summary */
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .invoice-box {
+    padding: 20px;
+  }
+
+  .top-section {
+    flex-direction: column;
+  }
+
+  .info-section {
+    padding: 10px;
+  }
+
+  .table-section table,
+  .table-section thead,
+  .table-section tbody,
+  .table-section th,
+  .table-section td,
+  .table-section tfoot {
+    font-size: 0.9em;
+  }
+
+  .table-section tfoot {
+    align-items: flex-start;
+  }
+}
+
+.totals-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 20px;
+  padding-right: 10px;
+}
+
+.total-row {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 5px;
+}
+
+.total-row .label {
+  flex: 1;
+  text-align: right;
+  margin-right: 10px;
+  color: #222;
+}
+
+.total-row .value {
+  text-align: right;
+  min-width: 100px;
+  font-weight: bold;
+  color: #000;
+}
+
+.total-bold {
+  font-size: 1.1em;
+  margin-top: 10px;
+  border-top: 1px solid #ccc;
+  padding-top: 5px;
+}
+
+button {
+  background: linear-gradient(to right, #4caf50, #2e7d32); /* Green gradient */
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  margin-top: 20px;
+}
+
+button:hover {
+  background: linear-gradient(to right, #66bb6a, #388e3c); /* Slightly brighter */
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+

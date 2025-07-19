@@ -1,1 +1,83 @@
-<p>main works!</p>
+<div id="invoice">
+  <div class="invoice-box" style="width: 1200px;">
+    <header class="top-section">
+      <div class="left">
+        <h1>INVOICE</h1>
+        <p>Invoice Number: <strong>#INV-2025001</strong></p> <!-- Optional but based on ID -->
+        <p>Invoice Date: <strong>July 19, 2025</strong></p>
+        <p>Due Date: <strong>July 30, 2025</strong></p>
+      </div>
+      <div class="right">
+        <h2>Your Company</h2>
+        <p>123 Business Rd</p>
+        <p>City, Country</p>
+        <p>Email: yourcompany.com</p>
+      </div>
+    </header>
+
+    <section class="info-section">
+      <div class="box">
+        <h3>Client Information</h3>
+        <p><strong>Customer Name:</strong> Lucas William</p>
+        <p><strong>Company:</strong> Alpha Co.</p>
+        <p><strong>Address:</strong> 3191 Florence Street Athens</p>
+      </div>
+    </section>
+
+    <section class="table-section">
+      <table>
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Description</th>
+            <th>Qty</th>
+            <th>Unit Price</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Website Development</td>
+            <td>5</td>
+            <td>$50</td>
+            <td>$250</td>
+          </tr>
+         
+        </tbody>
+      
+      
+      </table>
+      
+<div class="totals-box">
+  <div class="total-row">
+    <span class="label">Subtotal:</span>
+    <span class="value">$1,070</span>
+  </div>
+  <div class="total-row">
+    <span class="label">Tax:</span>
+    <span class="value">$107</span>
+  </div>
+  <div class="total-row total-bold">
+    <span class="label">Total Amount Due:</span>
+    <span class="value">$1,177</span>
+  </div>
+</div>
+    </section>
+
+    <section class="payment-section">
+      <h3>Payment Method</h3>
+      <p><strong>Method:</strong> Bank Transfer</p>
+      <p><strong>Account Number:</strong> 1234-5678-9012-3456</p>
+      <p><strong>Bank:</strong> ABC Bank</p>
+    </section>
+
+    <footer class="footer-note">
+      <p>Thank you for your business!</p>
+    </footer>
+  </div>
+</div>
+
+<div class="button-container">
+  <button (click)="downloadPDF()">Download Invoice</button>
+</div>
