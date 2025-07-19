@@ -1,0 +1,204 @@
+/* Reset and Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body, html {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Full-Window Gradient Background */
+.main {
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(135deg, #1f1c2c, #928dab);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+/* Frosted Glass Container */
+.content-box {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 40px 30px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.content-box:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 35px rgba(255, 255, 255, 0.1);
+}
+
+/* Headings and Tagline */
+.content-box h1 {
+  font-size: 2.5rem;
+  color: #fff;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+.content-box .tagline {
+  font-size: 1rem;
+  color: #e0e0e0;
+  margin-bottom: 25px;
+}
+
+/* Button Styling */
+button[routerLink] {
+  padding: 12px 30px;
+  font-size: 1rem;
+  background: linear-gradient(45deg, #ff416c, #ff4b2b);
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+button[routerLink]:hover {
+  background: linear-gradient(45deg, #ff4b2b, #ff416c);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Features Section */
+.features {
+  margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.feature-card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 20px;
+  width: 160px;
+  color: #fff;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  text-align: left;
+}
+
+.feature-card:hover {
+  transform: scale(1.05);
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.feature-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  color: #f8f8f8;
+}
+
+.feature-card p {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+/* Footer */
+.footer {
+  margin-top: 40px;
+  color: #aaa;
+  font-size: 0.85rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .content-box {
+    padding: 30px 20px;
+  }
+
+  .content-box h1 {
+    font-size: 2rem;
+  }
+
+  .feature-card {
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .content-box h1 {
+    font-size: 1.7rem;
+  }
+
+  .tagline {
+    font-size: 0.9rem;
+  }
+
+  button[routerLink] {
+    width: 100%;
+    padding: 12px 0;
+  }
+
+  .features {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Extra Styling */
+.feature-card::before {
+  content: '';
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  top: -20px;
+  right: -20px;
+  background: radial-gradient(circle, #ff4b2b 0%, transparent 70%);
+  border-radius: 50%;
+  opacity: 0.2;
+}
+
+.feature-card:hover::before {
+  opacity: 0.4;
+  transform: scale(1.2);
+}
+
+/* Transitions */
+.feature-card,
+button[routerLink],
+.content-box {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Shadows */
+.feature-card {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
