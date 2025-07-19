@@ -26,6 +26,7 @@ export class Input {
   };
 
   constructor(private api: Api, private router: Router) {}
+CId: number | null = null;
 
   addItem() {
     const total = this.item.quantity * this.item.price;
@@ -41,36 +42,41 @@ export class Input {
   }
 
   AddDetails(form: NgForm) {
-    if (form.invalid || this.items.length === 0) {
-      console.log("Invalid form or no items.");
-      return;
-    }
-
-    const data = {
-      customer: {
-        CId: form.value.CId,
-        name: form.value.Name,
-        phone: form.value.PhoneNumber,
-        company: form.value.CName,
-        address: form.value.Address,
-        email: form.value.Email
-      },
-      items: this.items,
-      payment: {
-        method: this.payment.method,
-        account_number: this.payment.account_number,
-        bank: this.payment.bank
-      }
-    };
-
-    this.api.PostComments(data).subscribe({
-      next: (res) => {
-        console.log("Response:", res);
-        alert("Invoice Submitted!");
-        this.items = [];
-        form.resetForm();
-      },
-      error: (err) => console.error("Error:", err)
-    });
+  if (form.invalid || this.items.length === 0) {
+    console.log("Invalid form or no items.");
+    return;
   }
+
+  const data = {
+    customer: {
+      CId: this.CId,
+      name: form.value.Name,
+      phone: form.value.PhoneNumber,
+      company: form.value.CName,
+      address: form.value.Address,
+      email: form.value.Email
+    },
+    items: this.items,
+    dueDate: this.dueDate, // ✅ include due date
+    payment: {
+      method: this.payment.method,
+      account_number: this.payment.account_number,
+      bank: this.payment.bank
+    }
+  };
+
+  this.api.PostComments(data).subscribe({
+    next: (res) => {
+      console.log("Response:", res);
+      
+      alert("Invoice Submitted!");
+      this.items = [];
+      form.resetForm();
+      this.dueDate = '';
+      this.payment = { method: '', account_number: '', bank: '' };
+    },
+    error: (err) => console.error("Error:", err)
+  });
+}
+
 }

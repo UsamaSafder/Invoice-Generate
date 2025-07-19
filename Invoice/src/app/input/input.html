@@ -1,41 +1,48 @@
-<form #input="ngForm" (ngSubmit)="AddDetails(input)">
-  <h1>Customer Info</h1>
-  <input type="number" ngModel name="CId" placeholder="Customer ID" required><br>
-  <input type="text" ngModel name="Name" placeholder="Customer Name" required><br>
-  <input type="number" ngModel name="PhoneNumber" placeholder="Customer Phone" required><br>
+<form #input="ngForm" (ngSubmit)="AddDetails(input)" class="invoice-form">
 
-  <h1>Company Info</h1>
-  <input type="text" ngModel name="CName" placeholder="Company Name" required><br>
-  <input type="text" ngModel name="Address" placeholder="Company Address" required><br>
-  <input type="number" ngModel name="CompanyPhone" placeholder="Company Phone" required><br>
-  <input type="email" ngModel name="Email" placeholder="Company Email" required><br>
+  <section class="form-block customer-info">
+    <h1>Customer Info</h1>
+    <input type="number" [(ngModel)]="CId" name="CId" placeholder="Customer ID" required>
+    <input type="text" ngModel name="Name" placeholder="Customer Name" required>
+    <input type="number" ngModel name="PhoneNumber" placeholder="Customer Phone" required>
+  </section>
 
-  <h1>Invoice Item</h1>
-  <input type="text" [(ngModel)]="item.description" name="description" placeholder="Item Description"><br>
-  <input type="number" [(ngModel)]="item.quantity" name="quantity" placeholder="Quantity"><br>
-  <input type="number" [(ngModel)]="item.price" name="price" placeholder="Price"><br>
-  <button type="button" (click)="addItem()">Add Item</button><br>
+  <section class="form-block company-info">
+    <h1>Company Info</h1>
+    <input type="text" ngModel name="CName" placeholder="Company Name" required>
+    <input type="text" ngModel name="Address" placeholder="Company Address" required>
+    <input type="number" ngModel name="CompanyPhone" placeholder="Company Phone" required>
+    <input type="email" ngModel name="Email" placeholder="Company Email" required>
+  </section>
 
-  <div *ngIf="items.length">
-    <h3>Items:</h3>
-    <ul>
-      <li *ngFor="let it of items">
-        {{ it.description }} - {{ it.quantity }} x {{ it.price }} = {{ it.total }}
-      </li>
-    </ul>
-  </div>
+  <section class="form-block invoice-item">
+    <h1>Invoice Item</h1>
+    <input type="text" [(ngModel)]="item.description" name="description" placeholder="Item Description">
+    <input type="number" [(ngModel)]="item.quantity" name="quantity" placeholder="Quantity">
+    <input type="number" [(ngModel)]="item.price" name="price" placeholder="Price">
+    <button type="button" (click)="addItem()">Add Item</button>
 
-  <label>Due Date:</label>
-  <input type="date" [(ngModel)]="dueDate" name="dueDate" required><br>
+    <div *ngIf="items.length" class="items-list-wrapper">
+      <h3>Items:</h3>
+      <ul class="items-list">
+        <li *ngFor="let it of items">{{ it.description }} - {{ it.quantity }} x {{ it.price }} = {{ it.total }}</li>
+      </ul>
+    </div>
 
-  <h1>Payment Info</h1>
-  <input type="text" [(ngModel)]="payment.method" name="method" placeholder="Payment Method" required><br>
-  <input type="text" [(ngModel)]="payment.account_number" name="account_number" placeholder="Account Number" required><br>
-  <input type="text" [(ngModel)]="payment.bank" name="bank" placeholder="Bank Name" required><br>
+    <label>Due Date:</label>
+    <input type="date" [(ngModel)]="dueDate" name="dueDate" required>
 
-  <p>Subtotal: {{ subtotal }}</p>
-  <p>Tax (15%): {{ tax }}</p>
-  <p><strong>Total: {{ total }}</strong></p>
+    <p>Subtotal: {{ subtotal }}</p>
+    <p>Tax (10%): {{ tax }}</p>
+    <p><strong>Total: {{ total }}</strong></p>
+  </section>
 
-  <button type="submit">Submit Invoice</button>
+  <section class="form-block payment-info">
+    <h1>Payment Info</h1>
+    <input type="text" [(ngModel)]="payment.method" name="PaymentMethod" placeholder="Payment Method" required>
+    <input type="text" [(ngModel)]="payment.account_number" name="AccountNumber" placeholder="Account Number" required>
+    <input type="text" [(ngModel)]="payment.bank" name="Bank" placeholder="Bank Name" required>
+  </section>
+
+  <button type="submit" class="submit-btn">Submit Invoice</button>
 </form>
