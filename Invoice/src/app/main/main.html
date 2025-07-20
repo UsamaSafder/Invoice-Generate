@@ -1,83 +1,106 @@
-<div id="invoice">
-  <div class="invoice-box" style="width: 1200px;">
-    <header class="top-section">
-      <div class="left">
-        <h1>INVOICE</h1>
-        <p>Invoice Number: <strong>#INV-2025001</strong></p> <!-- Optional but based on ID -->
-        <p>Invoice Date: <strong>July 19, 2025</strong></p>
-        <p>Due Date: <strong>July 30, 2025</strong></p>
+<div id="invoice-wrapper" style="display: flex; justify-content: center; padding: 20px;">
+  <div style="width: 100%; max-width: 900px;">
+    
+    <!-- Fetch Invoice Form -->
+    <div class="invoice-form">
+      <h2>Fetch Invoice by Customer ID</h2>
+      <div class="input-group">
+        <input type="number" [(ngModel)]="CId" placeholder="Enter Customer ID" />
+        <button (click)="fetchInvoiceData()">Fetch Invoice</button>
       </div>
-      <div class="right">
-        <h2>Your Company</h2>
-        <p>123 Business Rd</p>
-        <p>City, Country</p>
-        <p>Email: yourcompany.com</p>
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="error-msg">
+      <p>{{ errorMessage }}</p>
+    </div>
+
+    <!-- Invoice Display -->
+    <div *ngIf="customer && company && invoices.length > 0" id="invoice" class="invoice-box">
+      
+      <!-- Header with Company Name -->
+      <div style="text-align: center; margin-bottom: 10px;">
+       
+        <p style="font-size: 50px; margin: 5px 0;">{{ company.CName }}</p>
       </div>
-    </header>
 
-    <section class="info-section">
-      <div class="box">
-        <h3>Client Information</h3>
-        <p><strong>Customer Name:</strong> Lucas William</p>
-        <p><strong>Company:</strong> Alpha Co.</p>
-        <p><strong>Address:</strong> 3191 Florence Street Athens</p>
+      <hr style="margin: 20px 0;" />
+
+      <!-- Header Info -->
+      <header class="top-section" style="display: flex; justify-content: space-between;">
+        <div class="left">
+          <h2 style="margin: 0;">INVOICE</h2>
+          <p><strong>Customer ID:</strong> {{ customer.CId }}</p>
+          <p><strong>Name:</strong> {{ customer.Name }}</p>
+          <p><strong>Phone:</strong> {{ customer.PhoneNumber }}</p>
+        </div>
+        <div class="right company-info">
+          <p>{{ company.Address }}</p>
+          <p>{{ company.Email }}</p>
+          <p>{{ company.PhoneNumber }}</p>
+        </div>
+      </header>
+
+      <hr />
+
+      <!-- Loop Through Invoices -->
+      <div *ngFor="let inv of invoices" class="invoice-section">
+
+        <div class="invoice-header" style="text-align: center;">
+          <h3>Invoice #{{ inv.invoice.InvoiceID }}</h3>
+          <p>Customer ID: {{ customer.CId }}</p>
+        </div>
+
+        <h4>Items</h4>
+        <table class="item-table" style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+          <thead style="background: #000; color: #fff;">
+            <tr>
+              <th style="padding: 10px; border: 1px solid #ccc;">Description</th>
+              <th style="padding: 10px; border: 1px solid #ccc;">Qty</th>
+              <th style="padding: 10px; border: 1px solid #ccc;">Price</th>
+              <th style="padding: 10px; border: 1px solid #ccc;">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of inv.items">
+              <td style="padding: 10px; border: 1px solid #ccc;">{{ item.Description }}</td>
+              <td style="padding: 10px; border: 1px solid #ccc;">{{ item.Quantity }}</td>
+              <td style="padding: 10px; border: 1px solid #ccc;">Rs. {{ item.Price }}</td>
+              <td style="padding: 10px; border: 1px solid #ccc;">Rs. {{ item.Total }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Totals -->
+        <div class="totals-block" style="text-align: right; margin-top: 15px;">
+          <p><strong>Subtotal:</strong> Rs. {{ inv.invoice.SubTotal }}</p>
+          <p><strong>Tax (15%):</strong> Rs. {{ inv.invoice.Tax }}</p>
+          <p><strong>Total:</strong> Rs. {{ inv.invoice.Total }}</p>
+        </div>
+
+        <!-- Payment Info -->
+        <div class="payment-block" *ngIf="inv.payment" style="margin-top: 15px;">
+          <h4>Payment</h4>
+          <p><strong>Method:</strong> {{ inv.payment.method }}</p>
+          <p><strong>Account Number:</strong> {{ inv.payment.account_number }}</p>
+          <p><strong>Bank:</strong> {{ inv.payment.bank }}</p>
+        </div>
+
+        <hr />
       </div>
-    </section>
+    </div>
 
-    <section class="table-section">
-      <table>
-        <thead>
-          <tr>
-            <th>No.</th>
-            <th>Description</th>
-            <th>Qty</th>
-            <th>Unit Price</th>
-            <th>Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Website Development</td>
-            <td>5</td>
-            <td>$50</td>
-            <td>$250</td>
-          </tr>
-         
-        </tbody>
-      
-      
-      </table>
-      
-<div class="totals-box">
-  <div class="total-row">
-    <span class="label">Subtotal:</span>
-    <span class="value">$1,070</span>
-  </div>
-  <div class="total-row">
-    <span class="label">Tax:</span>
-    <span class="value">$107</span>
-  </div>
-  <div class="total-row total-bold">
-    <span class="label">Total Amount Due:</span>
-    <span class="value">$1,177</span>
-  </div>
-</div>
-    </section>
+    <!-- Action Buttons -->
+    <div class="action-buttons" style="text-align: center; margin-top: 20px;">
+      <button (click)="downloadPDF()" class="download-button">Download PDF</button>
+     <a [routerLink]="['/']" class="generate-btn">Home Page</a>
 
-    <section class="payment-section">
-      <h3>Payment Method</h3>
-      <p><strong>Method:</strong> Bank Transfer</p>
-      <p><strong>Account Number:</strong> 1234-5678-9012-3456</p>
-      <p><strong>Bank:</strong> ABC Bank</p>
-    </section>
+    </div>
 
-    <footer class="footer-note">
-      <p>Thank you for your business!</p>
-    </footer>
+    <!-- No Data Found -->
+    <div *ngIf="dataFetched && customer && invoices.length === 0" class="no-invoice-msg">
+      <p>No invoices found for this customer.</p>
+    </div>
+    
   </div>
-</div>
-
-<div class="button-container">
-  <button (click)="downloadPDF()">Download Invoice</button>
 </div>

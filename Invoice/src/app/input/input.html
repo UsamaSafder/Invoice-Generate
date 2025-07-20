@@ -1,5 +1,11 @@
 <form #input="ngForm" (ngSubmit)="AddDetails(input)" class="invoice-form" novalidate>
 
+  <div class="form-header">
+    <h1>Create New Invoice</h1>
+    <p>Please fill in the details below to generate a customer invoice.</p>
+    <p class="alert"><strong>Remember not to Forget Your Customer ID</strong></p>
+  </div>
+
   <section class="form-block customer-info">
     <h1>Customer Info</h1>
 
@@ -30,10 +36,12 @@
         placeholder="Customer Name"
         required
         minlength="3"
+        pattern="^[A-Za-z ]+$"
       />
       <div class="error" *ngIf="NameInput.invalid && (NameInput.dirty || NameInput.touched)">
         <small *ngIf="NameInput.errors?.['required']">Customer Name is required.</small>
         <small *ngIf="NameInput.errors?.['minlength']">Minimum 3 characters required.</small>
+        <small *ngIf="NameInput.errors?.['pattern']">Only letters and spaces allowed.</small>
       </div>
     </div>
 
@@ -49,9 +57,7 @@
       />
       <div class="error" *ngIf="PhoneNumberInput.invalid && (PhoneNumberInput.dirty || PhoneNumberInput.touched)">
         <small *ngIf="PhoneNumberInput.errors?.['required']">Customer Phone is required.</small>
-        <small *ngIf="PhoneNumberInput.errors?.['pattern']">
-          Phone number must be 7 to 15 digits, optional leading +.
-        </small>
+        <small *ngIf="PhoneNumberInput.errors?.['pattern']">Phone must be 7–15 digits, optional leading +.</small>
       </div>
     </div>
   </section>
@@ -68,10 +74,12 @@
         placeholder="Company Name"
         required
         minlength="2"
+        pattern="^(?!\d+$)[A-Za-z0-9 ]+$"
       />
       <div class="error" *ngIf="CNameInput.invalid && (CNameInput.dirty || CNameInput.touched)">
         <small *ngIf="CNameInput.errors?.['required']">Company Name is required.</small>
         <small *ngIf="CNameInput.errors?.['minlength']">Minimum 2 characters required.</small>
+        <small *ngIf="CNameInput.errors?.['pattern']">Must include letters, not all numbers.</small>
       </div>
     </div>
 
@@ -84,10 +92,12 @@
         placeholder="Company Address"
         required
         minlength="5"
+        pattern="^(?=.*[A-Za-z])(?=.*\d).+$"
       />
       <div class="error" *ngIf="AddressInput.invalid && (AddressInput.dirty || AddressInput.touched)">
-        <small *ngIf="AddressInput.errors?.['required']">Company Address is required.</small>
+        <small *ngIf="AddressInput.errors?.['required']">Address is required.</small>
         <small *ngIf="AddressInput.errors?.['minlength']">Minimum 5 characters required.</small>
+        <small *ngIf="AddressInput.errors?.['pattern']">Must include both letters and numbers.</small>
       </div>
     </div>
 
@@ -103,9 +113,7 @@
       />
       <div class="error" *ngIf="CompanyPhoneInput.invalid && (CompanyPhoneInput.dirty || CompanyPhoneInput.touched)">
         <small *ngIf="CompanyPhoneInput.errors?.['required']">Company Phone is required.</small>
-        <small *ngIf="CompanyPhoneInput.errors?.['pattern']">
-          Phone number must be 7 to 15 digits, optional leading +.
-        </small>
+        <small *ngIf="CompanyPhoneInput.errors?.['pattern']">Phone must be 7–15 digits, optional +.</small>
       </div>
     </div>
 
@@ -120,62 +128,40 @@
         email
       />
       <div class="error" *ngIf="EmailInput.invalid && (EmailInput.dirty || EmailInput.touched)">
-        <small *ngIf="EmailInput.errors?.['required']">Company Email is required.</small>
-        <small *ngIf="EmailInput.errors?.['email']">Invalid email address.</small>
+        <small *ngIf="EmailInput.errors?.['required']">Email is required.</small>
+        <small *ngIf="EmailInput.errors?.['email']">Invalid email format.</small>
       </div>
     </div>
   </section>
 
-  <section class="form-block invoice-item">
+  <section class="form-block invoice-item" >
     <h1>Invoice Item</h1>
-    <div class="input-box">
-      <input
-        type="text"
-        [(ngModel)]="item.description"
-        name="description"
-        placeholder="Item Description"
-        required
-        #DescInput="ngModel"
-      />
-      <div class="error" *ngIf="DescInput.invalid && (DescInput.dirty || DescInput.touched)">
-        <small *ngIf="DescInput.errors?.['required']">Item Description is required.</small>
-      </div>
-    </div>
 
-    <div class="input-box">
-      <input
-        type="number"
-        [(ngModel)]="item.quantity"
-        name="quantity"
-        placeholder="Quantity"
-        required
-        min="1"
-        #QtyInput="ngModel"
-      />
-      <div class="error" *ngIf="QtyInput.invalid && (QtyInput.dirty || QtyInput.touched)">
-        <small *ngIf="QtyInput.errors?.['required']">Quantity is required.</small>
-        <small *ngIf="QtyInput.errors?.['min']">Quantity must be at least 1.</small>
-      </div>
-    </div>
+   <!-- ✅ Updated Item Section - No required/min validations -->
+<input
+  type="text"
+  [(ngModel)]="item.description"
+  name="description"
+  placeholder="Item Description"
+/>
 
-    <div class="input-box">
-      <input
-        type="number"
-        [(ngModel)]="item.price"
-        name="price"
-        placeholder="Price"
-        required
-        min="0.01"
-        step="0.01"
-        #PriceInput="ngModel"
-      />
-      <div class="error" *ngIf="PriceInput.invalid && (PriceInput.dirty || PriceInput.touched)">
-        <small *ngIf="PriceInput.errors?.['required']">Price is required.</small>
-        <small *ngIf="PriceInput.errors?.['min']">Price must be positive.</small>
-      </div>
-    </div>
+<input
+  type="number"
+  [(ngModel)]="item.quantity"
+  name="itemQuantity"
+  placeholder="Quantity"
+/>
 
-    <button type="button" (click)="addItem()">Add Item</button>
+<input
+  type="number"
+  [(ngModel)]="item.price"
+  name="price"
+  placeholder="Price"
+  step="0.01"
+/>
+
+<button type="button" (click)="addItem()">Add Item</button>
+
 
     <div class="input-box" style="grid-column: span 2;">
       <label>Due Date:</label>
@@ -189,7 +175,6 @@
       />
       <div class="error" *ngIf="DueDateInput.invalid && (DueDateInput.dirty || DueDateInput.touched)">
         <small *ngIf="DueDateInput.errors?.['required']">Due Date is required.</small>
-        <small *ngIf="DueDateInput.errors?.['min']">Due Date cannot be in the past.</small>
       </div>
     </div>
   </section>
@@ -204,10 +189,12 @@
         name="PaymentMethod"
         placeholder="Payment Method"
         required
+        pattern="^[A-Za-z ]+$"
         #PaymentMethodInput="ngModel"
       />
       <div class="error" *ngIf="PaymentMethodInput.invalid && (PaymentMethodInput.dirty || PaymentMethodInput.touched)">
         <small *ngIf="PaymentMethodInput.errors?.['required']">Payment Method is required.</small>
+        <small *ngIf="PaymentMethodInput.errors?.['pattern']">Only letters allowed.</small>
       </div>
     </div>
 
@@ -219,11 +206,13 @@
         placeholder="Account Number"
         required
         minlength="5"
+        pattern="^[A-Za-z0-9]+$"
         #AccountNumberInput="ngModel"
       />
       <div class="error" *ngIf="AccountNumberInput.invalid && (AccountNumberInput.dirty || AccountNumberInput.touched)">
         <small *ngIf="AccountNumberInput.errors?.['required']">Account Number is required.</small>
-        <small *ngIf="AccountNumberInput.errors?.['minlength']">Minimum 5 characters required.</small>
+        <small *ngIf="AccountNumberInput.errors?.['minlength']">Minimum 5 characters.</small>
+        <small *ngIf="AccountNumberInput.errors?.['pattern']">Letters and numbers only.</small>
       </div>
     </div>
 
@@ -235,11 +224,13 @@
         placeholder="Bank Name"
         required
         minlength="2"
+        pattern="^[A-Za-z ]+$"
         #BankInput="ngModel"
       />
       <div class="error" *ngIf="BankInput.invalid && (BankInput.dirty || BankInput.touched)">
         <small *ngIf="BankInput.errors?.['required']">Bank Name is required.</small>
         <small *ngIf="BankInput.errors?.['minlength']">Minimum 2 characters required.</small>
+        <small *ngIf="BankInput.errors?.['pattern']">Only letters allowed.</small>
       </div>
     </div>
   </section>
@@ -251,4 +242,12 @@
   >
     Submit Invoice
   </button>
+  
+
+  <div *ngIf="errorMessage" class="alert error-msg">{{ errorMessage }}</div>
+  <div *ngIf="successMessage" class="alert success-msg">{{ successMessage }}</div>
 </form>
+
+<a [routerLink]="['/main']" class="generate-btn">Generate Invoice</a>
+
+

@@ -1,198 +1,158 @@
-/* === FULL SCREEN GRADIENT BACKGROUND === */
-body, html {
-  height: 100%;
-  margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #1e3c72, #2a5298, #50a7c2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  box-sizing: border-box;
-  color: #222;
-}
-
-/* === FORM CONTAINER === */
+/* Global form styling */
 .invoice-form {
-  background: #f7f9fc; /* solid light background for clarity */
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  max-width: 900px;
-  width: 100%;
-  padding: 30px 40px;
-  box-sizing: border-box;
-  overflow-y: auto;
-  max-height: 90vh;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 30px;
-}
-
-/* === FORM BLOCKS (sections) === */
-.form-block {
-  background: #fff;
-  padding: 25px 30px;
+  background-color: #a7c744; /* green background like image */
+  padding: 2rem;
   border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(80, 130, 190, 0.1);
-  display: flex;
-  flex-direction: column;
-  grid-column: span 2; /* full width by default */
+  max-width: 700px;
+  margin: auto;
+  font-family: Georgia, serif;
+  color: #2f2f2f;
 }
 
-.customer-info,
-.company-info,
-.invoice-item,
-.payment-info {
-  grid-column: span 2;
+/* Section titles */
+.form-block h1 {
+  font-size: 1.3rem;
+  color: #2c3e0f;
+  margin-bottom: 0.8rem;
+  border-bottom: 1px solid #678c2f;
+  padding-bottom: 4px;
 }
 
-/* Place two inputs side by side inside each section except invoice-item which is grid-column: 2 */
-.customer-info .input-box,
-.company-info .input-box,
-.payment-info .input-box {
-  flex: 1 1 48%;
-  margin-bottom: 15px;
+/* Labels (when used) */
+.invoice-form label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: bold;
 }
 
-.invoice-item .input-box {
-  margin-bottom: 15px;
+/* Input box containers */
+.input-box {
+  margin-bottom: 1.2rem;
+}
+
+/* Input fields */
+.invoice-form input,
+.invoice-form textarea,
+.invoice-form select {
   width: 100%;
-}
-
-/* Exception: place two inputs in one row for Customer Info and Company Info */
-.customer-info,
-.company-info {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px 20px;
-}
-
-.payment-info {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px 20px;
-}
-
-/* === HEADINGS === */
-h1 {
-  font-size: 1.6rem;
-  font-weight: 700;
-  margin-bottom: 20px;
-  color: #1e3c72;
-  user-select: none;
-}
-
-/* === INPUT FIELDS === */
-input[type="text"],
-input[type="number"],
-input[type="tel"],
-input[type="email"],
-input[type="date"] {
-  width: 100%;
-  padding: 12px 15px;
+  padding: 0.6rem;
+  border: 2px solid #d0e6a5;
+  border-radius: 6px;
   font-size: 1rem;
-  font-weight: 500;
-  border: 2px solid #c1c7d0;
-  border-radius: 8px;
-  background: #f9fbfd;
-  color: #1a1a1a;
+  background-color: #fdfdfc;
   box-sizing: border-box;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-input::placeholder {
-  color: #999;
-  font-style: italic;
+/* Textarea */
+.invoice-form textarea {
+  height: 100px;
 }
 
-input:focus {
-  border-color: #2a5298;
-  box-shadow: 0 0 8px rgba(42, 82, 152, 0.5);
-  outline: none;
-}
-
-input:hover:not(:focus) {
-  border-color: #5678b9;
-}
-
-/* === BUTTONS === */
-button {
-  padding: 12px 28px;
-  font-size: 1rem;
-  font-weight: 700;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  user-select: none;
-  color: #fff;
-  background: linear-gradient(135deg, #1e3c72, #2a5298);
-  box-shadow: 0 8px 18px rgba(30, 60, 114, 0.7);
-  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
-  align-self: flex-start;
-  margin-top: 10px;
-}
-
-button[type="submit"] {
-  grid-column: span 2;
-  width: 100%;
-  padding: 14px 0;
-  font-size: 1.2rem;
-  background: linear-gradient(135deg, #2a5298, #1e3c72);
-  box-shadow: 0 10px 25px rgba(42, 82, 152, 0.9);
-}
-
-button:disabled,
-button[disabled] {
-  background: #b0b6c3;
-  cursor: not-allowed;
-  box-shadow: none;
-  transform: none;
-}
-
-button:hover:not(:disabled) {
-  background: linear-gradient(135deg, #355aa8, #244079);
-  box-shadow: 0 12px 30px rgba(42, 82, 152, 1);
-  transform: translateY(-2px);
-}
-
-button:active:not(:disabled) {
-  transform: translateY(0);
-  box-shadow: 0 8px 20px rgba(30, 60, 114, 0.8);
-}
-
-/* === ERROR MESSAGES === */
-.error {
-  color: #d93025;
+/* Error messages */
+.error small {
+  color: #ff3333;
+  display: block;
+  margin-top: 0.2rem;
   font-size: 0.85rem;
-  margin-top: 4px;
-  user-select: none;
 }
 
-/* === Responsive adjustments === */
-@media (max-width: 860px) {
+/* Submit button */
+.submit-btn {
+  background-color: #3e4e11;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.6rem;
+  border-radius: 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  display: block;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #2f3d0c;
+}
+
+.submit-btn:disabled {
+  background-color: #8ba76c;
+  cursor: not-allowed;
+}
+
+/* Alerts */
+.alert {
+  padding: 0.75rem;
+  border-radius: 5px;
+  margin-top: 1rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.success-msg {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.error-msg {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* Generate Invoice Button */
+.generate-btn {
+  display: block;
+  width: fit-content;
+  margin: 2rem auto 0;
+  background-color: #3e4e11;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 20px;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.generate-btn:hover {
+  background-color: #2f3d0c;
+}
+
+/* ========== MOBILE RESPONSIVENESS ========== */
+@media (max-width: 600px) {
   .invoice-form {
-    grid-template-columns: 1fr;
-    max-height: 100vh;
+    padding: 1.2rem;
+    font-size: 0.95rem;
   }
 
-  .form-block {
-    grid-column: span 1;
+  .form-block h1 {
+    font-size: 1.1rem;
+    padding-bottom: 2px;
   }
 
-  .customer-info,
-  .company-info,
-  .payment-info {
-    display: block;
+  .input-box {
+    margin-bottom: 1rem;
   }
 
-  .customer-info .input-box,
-  .company-info .input-box,
-  .payment-info .input-box {
-    flex: 1 1 100%;
-    margin-bottom: 18px;
+  .invoice-form input,
+  .invoice-form textarea {
+    font-size: 0.95rem;
+    padding: 0.5rem;
   }
 
-  button[type="submit"] {
-    grid-column: span 1;
+  .submit-btn {
+    font-size: 0.95rem;
+    padding: 0.7rem 1.2rem;
+    border-radius: 25px;
+  }
+
+  .generate-btn {
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+    border-radius: 18px;
+  }
+
+  .alert {
+    font-size: 0.9rem;
   }
 }

@@ -1,4 +1,4 @@
-/* Reset and Base */
+/* === Reset and Base === */
 * {
   margin: 0;
   padding: 0;
@@ -12,7 +12,7 @@ body, html {
   overflow-x: hidden;
 }
 
-/* Full-Window Gradient Background */
+/* === Main Gradient Container === */
 .main {
   min-height: 100vh;
   width: 100%;
@@ -23,7 +23,7 @@ body, html {
   padding: 2rem;
 }
 
-/* Frosted Glass Container */
+/* === Frosted Glass Card === */
 .content-box {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(12px);
@@ -43,7 +43,7 @@ body, html {
   box-shadow: 0 0 35px rgba(255, 255, 255, 0.1);
 }
 
-/* Headings and Tagline */
+/* === Typography === */
 .content-box h1 {
   font-size: 2.5rem;
   color: #fff;
@@ -58,7 +58,7 @@ body, html {
   margin-bottom: 25px;
 }
 
-/* Button Styling */
+/* === Button === */
 button[routerLink] {
   padding: 12px 30px;
   font-size: 1rem;
@@ -69,6 +69,7 @@ button[routerLink] {
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  width: auto;
 }
 
 button[routerLink]:hover {
@@ -77,13 +78,14 @@ button[routerLink]:hover {
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
 }
 
-/* Features Section */
+/* === Features Section === */
 .features {
   margin-top: 40px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
+  width: 100%;
 }
 
 .feature-card {
@@ -96,6 +98,7 @@ button[routerLink]:hover {
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
   text-align: left;
+  position: relative;
 }
 
 .feature-card:hover {
@@ -115,14 +118,14 @@ button[routerLink]:hover {
   color: #ccc;
 }
 
-/* Footer */
+/* === Footer === */
 .footer {
   margin-top: 40px;
   color: #aaa;
   font-size: 0.85rem;
 }
 
-/* Responsive Design */
+/* === Media Queries === */
 @media (max-width: 768px) {
   .content-box {
     padding: 30px 20px;
@@ -137,9 +140,17 @@ button[routerLink]:hover {
     max-width: 300px;
     text-align: center;
   }
+
+  .features {
+    gap: 16px;
+  }
 }
 
 @media (max-width: 480px) {
+  .content-box {
+    padding: 25px 15px;
+  }
+
   .content-box h1 {
     font-size: 1.7rem;
   }
@@ -151,15 +162,29 @@ button[routerLink]:hover {
   button[routerLink] {
     width: 100%;
     padding: 12px 0;
+    font-size: 0.95rem;
   }
 
   .features {
     flex-direction: column;
     align-items: center;
+    gap: 15px;
+  }
+
+  .feature-card {
+    width: 100%;
+    max-width: 280px;
+    padding: 18px;
+    text-align: center;
+  }
+
+  .footer {
+    font-size: 0.8rem;
+    text-align: center;
   }
 }
 
-/* Extra Styling */
+/* === Extra Styling === */
 .feature-card::before {
   content: '';
   position: absolute;
@@ -170,6 +195,7 @@ button[routerLink]:hover {
   background: radial-gradient(circle, #ff4b2b 0%, transparent 70%);
   border-radius: 50%;
   opacity: 0.2;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .feature-card:hover::before {
@@ -177,19 +203,19 @@ button[routerLink]:hover {
   transform: scale(1.2);
 }
 
-/* Transitions */
+/* === Transitions === */
 .feature-card,
 button[routerLink],
 .content-box {
   transition: all 0.3s ease-in-out;
 }
 
-/* Shadows */
+/* === Shadows === */
 .feature-card {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Scrollbar Customization */
+/* === Scrollbar Customization === */
 ::-webkit-scrollbar {
   width: 8px;
 }
