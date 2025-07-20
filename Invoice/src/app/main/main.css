@@ -1,10 +1,29 @@
 /* General Reset */
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', sans-serif;
   background: #eef2f5;
   color: #333;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Invoice Wrapper & Container */
+#invoice-wrapper {
+  display: flex;
+  justify-content: center;
+  background: #f0f4f8;
+  padding: 40px;
+}
+
+.invoice-container {
+  width: 100%;
+  max-width: 900px;
 }
 
 /* Invoice Fetch Form with Gradient */
@@ -67,18 +86,35 @@ body {
   margin-top: 12px;
 }
 
-/* Invoice Container with Gradient */
-.invoice-box {
-  width: 794px;
-  max-width: 100%;
+/* Invoice Box */
+.invoice-box,
+#invoice {
+  width: 100%;
+  max-width: 794px;
   margin: auto;
   padding: 30px;
   background: linear-gradient(145deg, #ffffff, #f0f0f0);
   color: black;
   font-size: 15px;
-  box-sizing: border-box;
   border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.07);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.07);
+}
+
+/* Company Header */
+.invoice-header-center {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.invoice-company-name {
+  font-size: 60px;
+  margin: 5px 0;
+  font-weight: bold;
+}
+
+/* Divider */
+.divider {
+  margin: 20px 0;
 }
 
 /* Top Section */
@@ -89,35 +125,25 @@ body {
   margin-bottom: 35px;
 }
 
-.top-section .left h1 {
+.invoice-title {
   font-size: 30px;
+  font-weight: bolder;
   margin: 0;
-  color: #2c3e50;
-  text-transform: uppercase;
-  letter-spacing: 1px;
 }
 
-.top-section .left p {
-  margin: 4px 0;
-  color: #555;
+.invoice-label {
+  font-size: 18px;
+  font-weight: bolder;
 }
 
 .company-info {
   text-align: right;
 }
 
-.company-info .company-name {
-  font-size: 22px;
-  font-weight: bold;
-  margin-bottom: 4px;
-  color: #2980b9;
-  text-transform: uppercase;
-}
-
 .company-info p {
+  font-size: 18px;
+  font-weight: bolder;
   margin: 2px 0;
-  font-size: 13px;
-  color: #777;
 }
 
 /* Invoice Header */
@@ -126,18 +152,23 @@ body {
   margin-bottom: 25px;
 }
 
-.invoice-header h3 {
+.invoice-number {
+  font-size: 39px;
+  font-weight: bolder;
+}
+
+.invoice-customer-id {
   font-size: 20px;
-  margin: 0;
-  color: #2c3e50;
+  font-weight: bolder;
 }
 
-.invoice-header p {
-  font-size: 14px;
-  color: #666;
+/* Items Table */
+.invoice-items-heading {
+  font-size: 30px;
+  font-weight: bolder;
+  margin-bottom: -10px;
 }
 
-/* Item Table */
 .item-table {
   width: 100%;
   border-collapse: collapse;
@@ -151,6 +182,7 @@ body {
   padding: 12px;
   text-align: center;
   font-size: 14px;
+  word-wrap: break-word;
 }
 
 .item-table th {
@@ -163,8 +195,11 @@ body {
 .item-table tr:nth-child(even) {
   background-color: #f9f9f9;
 }
-
-/* Totals Section with Gradient */
+.title{
+  font-size: 40px;
+  font-weight: bolder;
+}
+/* Totals */
 .totals-block {
   width: 320px;
   margin-left: auto;
@@ -186,24 +221,27 @@ body {
   color: #000;
 }
 
-/* Payment Block with Gradient */
+/* Payment Block */
 .payment-block {
   margin-top: 20px;
   padding: 15px;
   background: linear-gradient(135deg, #fef9e7, #ffffff);
   border-left: 5px solid #f39c12;
   border-radius: 6px;
+  width: 100%;
 }
 
 .payment-block h4 {
   margin: 0 0 8px 0;
-  font-size: 16px;
+  font-size: 26px;
+  font-weight: bolder;
   color: #2c3e50;
 }
 
 .payment-block p {
   margin: 2px 0;
-  font-size: 14px;
+  font-size: 18px;
+  font-weight: bolder;
 }
 
 /* Action Buttons */
@@ -255,25 +293,6 @@ body {
   font-size: 15px;
 }
 
-/* Print Area */
-#invoice {
-  width: 794px;
-  background: white;
-  color: black;
-  padding: 25px;
-  margin: 0 auto;
-  box-sizing: border-box;
-  border-radius: 8px;
-}
-
-/* Centered Wrapper */
-#invoice-wrapper {
-  display: flex;
-  justify-content: center;
-  background: #f0f4f8;
-  padding: 40px;
-}
-
 /* ============================
    Mobile Responsiveness
    ============================ */
@@ -290,8 +309,13 @@ body {
   .input-group {
     flex-direction: column;
     gap: 10px;
+    width: 100%;
+    align-items: stretch;
   }
-
+  .title{
+  font-size: 28px;
+  font-weight: bolder;
+}
   .input-group input,
   .input-group button {
     width: 100%;
@@ -300,9 +324,8 @@ body {
 
   .invoice-box,
   #invoice {
-    padding: 20px;
-    width: 100%;
-    border-radius: 8px;
+    padding: 15px !important;
+    width: 100% !important;
   }
 
   .top-section {
@@ -311,7 +334,7 @@ body {
     gap: 15px;
   }
 
-  .top-section .left h1 {
+  .invoice-title {
     font-size: 22px;
   }
 
@@ -319,8 +342,8 @@ body {
     text-align: left;
   }
 
-  .company-info .company-name {
-    font-size: 18px;
+  .company-info p {
+    font-size: 16px;
   }
 
   .invoice-header h3 {
@@ -334,7 +357,7 @@ body {
   }
 
   .totals-block {
-    width: 100%;
+    width: 100% !important;
     padding: 12px 15px;
     font-size: 13px;
   }
@@ -345,7 +368,7 @@ body {
 
   .payment-block {
     padding: 12px;
-    margin-right: 10px;
+    margin-right: 0 !important;
   }
 
   .payment-block h4 {
@@ -373,53 +396,107 @@ body {
     margin: 20px 10px;
     font-size: 14px;
   }
-
-  #invoice-wrapper {
-    padding: 20px 10px;
+}
+@media (max-width: 390px) {
+  body {
+    font-size: 13px;
   }
+
+  .invoice-form {
+    padding: 15px;
+    margin: 15px 8px;
+  }
+  .title{
+  font-size: 24px;
+  font-weight: bolder;
 }
 
-/* Additional Fixes for Extra Small Screens */
-@media (max-width: 500px) {
-  body {
-    overflow-x: hidden; /* Prevent unwanted horizontal scroll */
+  .invoice-form h2 {
+    font-size: 18px;
   }
 
-  .invoice-box,
-  #invoice {
-    width: 100% !important; /* Override fixed width */
-    padding: 15px !important;
-    box-sizing: border-box;
-  }
-
-  .payment-block {
-    margin-right: 0 !important; /* Remove excess spacing */
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .totals-block {
-    width: 100% !important;
-    box-sizing: border-box;
-  }
-
-  .item-table th,
-  .item-table td {
-    word-wrap: break-word;
-  }
-    .input-group {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-    width: 100%;
+  .input-group {
+    gap: 8px;
   }
 
   .input-group input,
   .input-group button {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .invoice-box,
+  #invoice {
+    padding: 12px;
+    font-size: 13px;
+  }
+
+  .invoice-title {
+    font-size: 20px;
+  }
+
+  .invoice-number {
+    font-size: 24px;
+  }
+
+  .invoice-customer-id {
+    font-size: 16px;
+  }
+
+  .invoice-company-name {
+    font-size: 34px;
+  }
+
+  .invoice-label,
+  .company-info p {
+    font-size: 14px;
+  }
+
+  .item-table {
+    font-size: 12px;
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .item-table th,
+  .item-table td {
+    white-space: nowrap;
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  .totals-block {
     width: 100%;
-    box-sizing: border-box;
-    font-size: 15px;
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .totals-block p:last-child {
+    font-size: 14px;
+  }
+
+  .payment-block {
+    padding: 10px;
+    margin-top: 16px;
+  }
+
+  .payment-block h4 {
+    font-size: 14px;
+  }
+
+  .payment-block p {
+    font-size: 13px;
+  }
+
+  .download-button,
+  .generate-btn {
+    padding: 10px 18px;
+    font-size: 13px;
+  }
+
+  .no-invoice-msg {
+    padding: 10px;
+    font-size: 13px;
   }
 }
-
-

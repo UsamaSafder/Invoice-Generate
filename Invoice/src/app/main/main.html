@@ -21,7 +21,7 @@
       <!-- Header with Company Name -->
       <div style="text-align: center; margin-bottom: 10px;">
        
-        <p style="font-size: 50px; margin: 5px 0;">{{ company.CName }}</p>
+        <p class="title">{{ company.CName }}</p>
       </div>
 
       <hr style="margin: 20px 0;" />
@@ -30,12 +30,12 @@
       <header class="top-section" style="display: flex; justify-content: space-between;">
         <div class="left">
           <h2 style="margin: 0;">INVOICE</h2>
-          <p><strong>Customer ID:</strong> {{ customer.CId }}</p>
+          <p><strong>Customer ID:</strong > {{ customer.CId }}</p>
           <p><strong>Name:</strong> {{ customer.Name }}</p>
           <p><strong>Phone:</strong> {{ customer.PhoneNumber }}</p>
         </div>
         <div class="right company-info">
-          <p>{{ company.Address }}</p>
+          <p >{{ company.Address }}</p>
           <p>{{ company.Email }}</p>
           <p>{{ company.PhoneNumber }}</p>
         </div>
