@@ -1,8 +1,8 @@
 Invoice Generate
 A sleek, responsive invoice generation web app developed using Angular 20, TypeScript, and CSS. Effortlessly create professional invoices using an intuitive UI.
 
-🌐 Live Demo: Invoice Generate Live
-📦 Source Code: GitHub Repository
+🌐 Live Demo:[ Invoice Generate Live](https://hmftj.com/interns/invoice_U/)
+
 
 Features
 Create, Edit, and Delete Invoices — Manage multiple invoices with ease.
