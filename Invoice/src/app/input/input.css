@@ -1,12 +1,13 @@
 /* Global form styling */
 .invoice-form {
-  background-color: #a7c744; /* green background like image */
+  background-color: #a7c744; 
   padding: 2rem;
   border-radius: 10px;
   max-width: 700px;
   margin: auto;
   font-family: Georgia, serif;
   color: #2f2f2f;
+
 }
 
 /* Section titles */
