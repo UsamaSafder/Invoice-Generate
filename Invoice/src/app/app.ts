@@ -11,4 +11,5 @@ import { Home } from './home/home';
 export class App {
   protected title = 'Invoice';
   name='Invoice Generator';
+  source='Invoice Generator';
 }
